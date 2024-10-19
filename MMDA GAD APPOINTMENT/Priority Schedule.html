@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My First Website</title>
+  <link rel="stylesheet" href="styles.css"> <!-- Optional: link to a CSS file -->
+  
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-image: url('sean.png');
+      background-size: cover;
+      background-position: right;
+      background-repeat: no-repeat;
+      color: white;
+      padding: 20px;
+    }
+    .header-container {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    .header-container img {
+      margin-right: 10px;
+      width: 100px;
+      height: auto;
+    }
+    .form-container {
+      background-color: #4169e1;
+      padding: 20px;
+      border-radius: 8px;
+      width: 350px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      margin-top: 20px;
+    }
+    .form-container h2 {
+      text-align: center;
+      margin-bottom: 15px;
+    }
+    .form-container label {
+      display: block;
+      margin-bottom: 5px;
+      font-size: 14px;
+    }
+    .form-container input, .form-container select {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ffd700;
+      border-radius: 5px;
+      background-color: #5f1414;
+      color: white;
+    }
+    .form-container .btn-container {
+      display: flex;
+      justify-content: space-between;
+    }
+    .form-container .button {
+      width: 48%;
+      padding: 10px;
+      background-color: #FF0000;
+      border-color: #ffaa00;
+      color: white;
+      text-align: center;
+      text-decoration: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .form-container .button:hover {
+      background-color: #ffaa00;
+    }
+
+    /* Align checkbox and text */
+    .terms-container {
+      display: flex;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+    .terms-container input[type="checkbox"] {
+      margin-right: 10px;
+      width: 18px;
+      height: 18px;
+    }
+    .terms-container label {
+      font-size: 14px;
+      color: white;
+    }
+    .terms-container a {
+      color: #ffcc00;
+      text-decoration: none;
+    }
+    .terms-container a:hover {
+      text-decoration: underline;
+    }
+
+    /* Video container styling for top-right alignment */
+    .video-container {
+      position: absolute;
+      top: 200px; /* Adjust as needed */
+      right: 30px; /* Add a right margin of 30px */
+      width: 800px; /* Set a fixed width for the video container */
+      height: 500px; /* Fixed height of the video container */
+      overflow: hidden; /* Ensure that any overflow is hidden */
+    }
+    .video-container video {
+      width: 100%; /* Use 100% of the container width */
+      height: auto; /* Maintain the aspect ratio of the video */
+      border-radius: 20px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+  </style>
+</head>
+<body>
+  
+  <!-- Header section with MMDA logo and title -->
+  <img src="23.png" alt="MMDA Banner" class="banner">
+  <div>
+    <p>Web-Based Appointment System</p>
+  </div>
+
+  <!-- Registration form -->
+  <div class="form-container">
+    <h2>Register as New Account</h2>
+    
+    <a href="loginform.html">Already have an account?</a>
+    
+    <p></p>
+
+    <form id="registration-form"> <!-- Add form element here -->
+      <label for="gender">Select Gender</label>
+      <select id="gender" required>
+        <option value="" disabled selected>Select your gender</option>
+        <option value="male">Male</option>
+        <option value="female">Female</option>
+        <option value="other">Other</option>
+      </select>
+
+      <label for="civil-status">Civil Status</label>
+      <select id="civil-status" required>
+        <option value="" disabled selected>Select your status</option>
+        <option value="single">Single</option>
+        <option value="married">Married</option>
+        <option value="widowed">Widowed</option>
+      </select>
+
+      <label for="birth-date">Birth Date</label>
+      <input type="date" id="birth-date" required>
+
+      <label for="first-name">First Name (Ex. JUAN DELA CRUZ)</label>
+      <input type="text" id="first-name" placeholder="First Name" required>
+
+      <label for="middle-name">Middle Name</label>
+      <input type="text" id="middle-name" placeholder="Middle Name" required>
+
+      <label for="surname">Surname</label>
+      <input type="text" id="surname" placeholder="Surname" required>
+
+      <label for="email">Email Address</label>
+      <input type="email" id="email" placeholder="Email Address" required>
+
+      <label for="password">Password</label>
+      <input type="password" id="password" placeholder="Password" required>
+
+      <label for="confirm-password">Confirm Password</label>
+      <input type="password" id="confirm-password" placeholder="Confirm Password" required>
+
+      <!-- Updated checkbox alignment -->
+      <div class="terms-container">
+        <input type="checkbox" id="terms" required>
+        <label for="terms">I accept <a href="#">Terms of Service</a></label>
+      </div>
+
+      <!-- Using a button for Sign Up to utilize form validation -->
+      <div class="btn-container">
+        <button type="button" class="button" onclick="validateForm()">Sign Up</button>
+        <a href="#" class="button" onclick="confirmCancel()">Cancel</a>
+      </div>
+    </form>
+  </div>
+
+  <script>
+    function confirmCancel() {
+      if (confirm("Are you sure you don't want to continue? All entered information will be lost.")) {
+        document.getElementById("registration-form").reset(); // Reset the entire form
+        alert("All fields have been cleared.");
+      }
+    }
+    
+    function validateForm() {
+      const form = document.getElementById("registration-form");
+      if (form.checkValidity()) {
+        // If valid, redirect to the login form
+        window.location.href = "loginform.html"; // Replace with your actual submission logic
+      } else {
+        alert("Please fill out all required fields."); // Alert for invalid form
+      }
+    }
+  </script>
+
+  <!-- Video Section -->
+  <div class="video-container">
+    <video autoplay muted loop>
+      <source src="slide2 (1).mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+  </div>
+
+</body>
+</html>
